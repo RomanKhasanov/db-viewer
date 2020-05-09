@@ -2,6 +2,7 @@
 
 const path = require("path");
 
+const PnpWebpackPlugin = require("pnp-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = function (env) {
@@ -42,8 +43,11 @@ module.exports = function (env) {
             ],
         },
         resolve: {
-            modules: ["node_modules"],
+            plugins: [PnpWebpackPlugin],
             extensions: [".js", ".jsx", ".ts", ".tsx"],
+        },
+        resolveLoader: {
+            plugins: [PnpWebpackPlugin.moduleLoader(module)],
         },
         plugins: [
             new webpack.DefinePlugin({

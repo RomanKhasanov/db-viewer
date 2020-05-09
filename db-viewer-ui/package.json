@@ -95,6 +95,7 @@
     "mocha": "^7.1.2",
     "nerdbank-gitversioning": "^3.1.74",
     "npm-run-all": "^4.1.5",
+    "pnp-webpack-plugin": "^1.6.4",
     "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

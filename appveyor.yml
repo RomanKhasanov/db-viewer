@@ -37,19 +37,20 @@ before_build:
   - cmd: dotnet --info
   - cmd: dotnet restore ./DbViewer.sln --verbosity minimal
   - cmd: dotnet tool restore
-  - cmd: yarn install --frozen-lockfile
+  - cmd: yarn policies set-version berry
+  - cmd: cd db-viewer-ui && yarn install --immutable
 
 build_script:
   - cmd: dotnet build --configuration Release ./DbViewer.sln
   - cmd: dotnet pack --no-build --configuration Release ./DbViewer.sln
-  - cmd: yarn build
+  - cmd: cd db-viewer-ui && yarn build
 
 before_test:
   - cmd: docker-compose up -d
 
 test_script:
   - cmd: dotnet test --no-build --configuration Release ./DbViewer.Tests/DbViewer.Tests.csproj
-  - cmd: yarn lint
+  - cmd: cd db-viewer-ui && yarn lint
 
 after_test:
   - ps: |

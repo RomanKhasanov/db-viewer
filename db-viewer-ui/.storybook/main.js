@@ -1,5 +1,6 @@
 const path = require("path");
 const fs = require("fs");
+const PnpWebpackPlugin = require("pnp-webpack-plugin");
 
 const babelConfig = JSON.parse(fs.readFileSync(path.resolve(__dirname, "../.babelrc")));
 
@@ -37,7 +38,11 @@ module.exports = {
             },
         ];
 
+        config.resolve.plugins = [PnpWebpackPlugin];
         config.resolve.extensions = [".js", ".jsx", ".ts", ".tsx"];
+
+        config.resolveLoader = config.resolveLoader || {};
+        config.resolveLoader.plugins = [PnpWebpackPlugin.moduleLoader(module)];
 
         return config;
     },
